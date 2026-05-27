@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_문서객체모델</title>
+</head>
+<body>
+    <h3>3.문서객체모델(DOM)</h3>
+    <h4>문서객체 선택</h4>
+    <ul>
+        <li id = "seoul">
+            <span>서울</span>
+            <ol>
+                <li><i>명동</i></li>
+                <li><i>명동</i></li>
+                <li><i>명동</i></li>
+                <li><i>명동</i></li>
+            </ol>
+        </li>
+        <li id = "daegu">
+            <span>서울</span>
+            <ol>
+                <li><i>명동</i></li>
+                <li><i>명동</i></li>
+                <li><i>명동</i></li>
+                <li><i>명동</i></li>
+            </ol>
+        </li>
+        <li class="gwangju">광주</li>
+    </ul>
+    <script>
+        //----------------------------------
+        // 문서객체 선택
+        //----------------------------------
+        const h3 = document.querySelector('h3');
+        h3.style.color = 'red';
+
+        const seoul = document.querySelector('#seoul > span');
+        seoul.style.color = 'blue';
+        
+    </script>
+    <hr>
+    
+    <h4>문서객체 조작</h4>
+    <script>
+        //----------------------------------
+        // 문서객체 조작
+        //----------------------------------
+
+    </script>
+    <hr>
+    <h4>문서객체 추가/이동</h4>
+    <script>
+        //----------------------------------
+        // 문서객체 추가/이동
+        //----------------------------------
+
+    </script>
+    <hr>
+    <h4>문서객체 생성/삭제</h4>
+    <script>
+        //----------------------------------
+        // 문서객체 생성/삭제
+        //----------------------------------
+
+    </script>
+    <hr>
+
+</body>
+</html>
