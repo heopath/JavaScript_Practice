@@ -91,17 +91,42 @@
             
             // 각 input의 뒤에 있는 span.result 태그 선택
             const results = document.querySelectorAll('.result');
-
+            
             // 1) keydown : 키보드를 누르는 순간 (입력된 글자가 반영되기 직전)
             userid.addEventListener('keydown', function() {
                 // 입력창의 실시간 값을 span에 출력 (input 이벤트가 더 정확하지만 key 확인용)
                 results[0].textContent = '입력 중...';
             });
-
+            
             // 2) keyup : 키보드를 누르고 뗄 때 (글자가 입력창에 최종 반영된 후)
             name.addEventListener('keyup', function() {
                 results[1].textContent = this.value; // 입력한 텍스트가 실시간으로 출력됨
             });
+
+            // 폼 이벤트
+            const formUser = document.formUser; // from 태그 name 속성값으로 문서객체
+            const inputUserid = formUser.userid;
+            const inputName = formUser.name;
+            const selectAddr = formUser.addr;
+            const prints = formUser.getElementsByClassName('print');            
+
+            inputUserid.addEventListener('focus', function(){
+                prints[0].innerHTML = 'focus!';
+            });
+
+            inputName.addEventListener('focusout', function(){
+                prints[1].innerHTML = 'focusout!';
+            });
+
+            selectAddr.addEventListener('change', function(){
+                prints[2].innerHTML = this.value;
+            });
+
+            formUser.addEventListener('submit', function(){
+                alert('전송시작');
+            });
+
+
 
         }); // DOMContentLoaded 끝
     </script>
@@ -125,7 +150,7 @@
 
     <h4>키보드 이벤트</h4>
     <section>
-        <form name="formUser">
+        <form>
             <p>
                 아이디 (keydown): <input type="text" name="userid">
                 <span class="result"></span>
@@ -138,6 +163,29 @@
     </section>
     
     <h4>폼 이벤트</h4>
+    <section>
+        <form name="formUser">
+            <p>
+                <input type="text" name ="userid">
+                <span class="print"></span>
+            </p>
+            <p>
+                <input type="text" name ="name">
+                <span class="print"></span>
+            </p>
+            <p>
+                <select name="addr">
+                    <option>서울</option>
+                    <option>대전</option>
+                    <option>대구</option>
+                    <option>부산</option>
+                    <option>광주</option>
+                </select>
+                <span class="print"></span>
+            </p>
+            <input type="submit" value="전송">
+        </form>
+    </section>
 
 </body>
 </html>
