@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_이벤트종류</title>
+    <style>
+        .box {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            vertical-align: top;
+            text-align: center;
+            line-height: 100px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.1s;
+        }
+        .result {
+            margin-left: 10px;
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        console.log('1...');
+        
+        // 문서 로드 이벤트 - 브라우저가 HTML을 다 읽고 DOM 트리를 완성한 후에 실행됩니다.
+        document.addEventListener('DOMContentLoaded', function(){
+            console.log('3...');
+            
+            // --- [1. 문서 이벤트] ---
+            const btnConfirm = document.getElementById('btnConfirm');
+            console.log(btnConfirm);
+            
+            btnConfirm.onclick = function(){
+                alert('확인!!!');
+            };
+
+
+            // --- [2. 마우스 이벤트] (이제 DOM 조작 에러가 나지 않습니다) ---
+            const boxs = document.getElementsByClassName('box');
+
+            // 1) click : 마우스를 클릭했을 때
+            boxs[0].addEventListener('click', function(){
+                this.style.background = 'red';
+            });
+
+            // 2) mousedown : 마우스 버튼을 누르는 순간
+            boxs[1].addEventListener('mousedown', function(){
+                this.style.background = 'orange';
+            });
+
+            // 3) mouseup : 마우스 버튼에서 손을 떼는 순간
+            boxs[2].addEventListener('mouseup', function(){
+                this.style.background = 'yellow';
+            });
+
+            // 4) mouseover : 마우스가 박스 위로 올라올 때
+            boxs[3].addEventListener('mouseover', function(){
+                this.style.background = 'green';
+                this.style.color = 'white';
+            });
+
+            // 5) mouseenter : 마우스가 박스 영역 내부로 진입할 때
+            boxs[4].addEventListener('mouseenter', function(){
+                this.style.background = 'blue';
+                this.style.color = 'white';
+            });
+
+            // 6) mouseout : 마우스가 박스 밖으로 나갈 때
+            boxs[5].addEventListener('mouseout', function(){
+                this.style.background = 'purple';
+                this.style.color = 'white';
+            });
+
+            // 7) mousemove : 마우스가 박스 위에서 움직일 때마다
+            let count = 0;
+            boxs[6].addEventListener('mousemove', function(){
+                count++;
+                this.textContent = count;
+                this.style.background = '#e0e0e0';
+            });
+
+
+            // --- [3. 키보드 이벤트] ---
+            const userid = document.getElementsByName('userid')[0];
+            const name = document.getElementsByName('name')[0];
+            
+            // 각 input의 뒤에 있는 span.result 태그 선택
+            const results = document.querySelectorAll('.result');
+
+            // 1) keydown : 키보드를 누르는 순간 (입력된 글자가 반영되기 직전)
+            userid.addEventListener('keydown', function() {
+                // 입력창의 실시간 값을 span에 출력 (input 이벤트가 더 정확하지만 key 확인용)
+                results[0].textContent = '입력 중...';
+            });
+
+            // 2) keyup : 키보드를 누르고 뗄 때 (글자가 입력창에 최종 반영된 후)
+            name.addEventListener('keyup', function() {
+                results[1].textContent = this.value; // 입력한 텍스트가 실시간으로 출력됨
+            });
+
+        }); // DOMContentLoaded 끝
+    </script>
+</head>
+<body>
+    <h3>2.이벤트 종류</h3>
+    
+    <h4>문서 이벤트</h4>
+    <button id="btnConfirm">확인</button>
+
+    <h4>마우스 이벤트</h4>
+    <section>
+        <div class="box box1">click</div>
+        <div class="box box2">mousedown</div>
+        <div class="box box3">mouseup</div>
+        <div class="box box4">mouseover</div>
+        <div class="box box5">mouseenter</div>
+        <div class="box box6">mouseout</div>
+        <div class="box box7">mousemove</div>
+    </section>
+
+    <h4>키보드 이벤트</h4>
+    <section>
+        <form name="formUser">
+            <p>
+                아이디 (keydown): <input type="text" name="userid">
+                <span class="result"></span>
+            </p>
+            <p>
+                이름 (keyup): <input type="text" name="name">
+                <span class="result"></span>
+            </p>
+        </form>
+    </section>
+    
+    <h4>폼 이벤트</h4>
+
+</body>
+</html>
+<script>
+    console.log('2...');
+</script>
