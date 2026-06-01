@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_프로미스</title>
+</head>
+<body>
+    <h3>2.프로미스</h3>
+    <script>
+        // Promise 기본
+        const promise = new Promise((resolve, reject)=>{
+            // Promise 제작 코드
+            const result = true;
+
+            if(result){
+                resolve('Promise Success...');
+            }else{
+                reject('Promise Failed...');
+            }
+
+
+        });
+        
+        // Promise 소비코드(비동기 처리)
+        promise
+            .then((result)=>{ // resolve 호출시 실행
+                console.log('then : ' + result);
+            })
+            .catch((result)=>{ // reject() 호출시 실행
+                console.log('catch : ' + result);
+            })
+            .finally(()=>{
+                console.log('finally...');
+            });
+
+            // Promise 비동기 처리
+            function step1(){
+                return new Promise((resolve, reject)=>{
+                    setTimeout(function(){
+                        resolve('step1...')
+                    }, 1000);
+                });
+            }
+            function step2(message){
+                console.log(message);
+
+                return new Promise((resolve, reject)=>{
+                    setTimeout(function(){
+                        resolve('step2...')
+                    }, 2000);
+                });
+            }
+            
+            function step3(message){
+                console.log(message);
+
+                return new Promise((resolve, reject)=>{
+                    setTimeout(function(){
+                        resolve('step3...')
+                    }, 3000);
+                });
+            }
+
+            step1()
+                .then((message)=>{
+                    return step2(message);
+                })
+                .then((message)=>{
+                    return step3(message);
+                })
+                .then((message)=>{
+                    console.log('message : ' + message);
+                });
+    </script>
+</body>
+</html>
