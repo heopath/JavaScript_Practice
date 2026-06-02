@@ -8,27 +8,31 @@
 
         document.addEventListener('DOMContentLoaded', function(){
 
-            const btnSubmit = document.getElementById('submit');
-            const form = document.formUser; // form 태그 name 속성값으로 문서객체 가져오기
+            const btnSubmit = document.getElementById('submit');            
  
-            btnSubmit.addEventListener('click', function(e){
+            btnSubmit.addEventListener('click', async function(e){
                 e.preventDefault();
 
-                // JSON 생성
-                const jsonData = {
-                    "userid": form.userid.value,
-                    "name": form.name.value,
-                    "hp": form.hp.value,
-                    "age": form.age.value,
-                };
+                // 폼 데이터 생성
+                const formData = new FormData(document.formUser); // form 태그 name 속성값으로 문서객체 가져오기
+                
+                // 서버 전송
+                const response = await fetch('http://localhost:8080/ch09/user1/register.do', {
+                                            method: 'POST',                                            
+                                            body: formData
+                                        });
 
-                console.log(jsonData);
+                const data = await response.json();
+                                        
+                console.log(data);
+                if(data != null){
+                    alert(data.name + '님 등록 성공!!');
+
+                    // 목록 이동
+                    location.href ='./list.html';
+                }
 
             });
-
-
-
-
 
         });
 
@@ -44,6 +48,7 @@
     <a href="./register.html">등록</a>
 
     <form name="formUser">
+        <input type="hidden" name="mode" value="json">
         <table border="1">
             <tr>
                 <td>아이디</td>

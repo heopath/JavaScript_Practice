@@ -24,7 +24,7 @@
                                             <td>${user.age}</td>
                                             <td>
                                                 <a href='#'>수정</a>
-                                                <a href='#'>삭제</a>
+                                                <a href='#' class='del' data-userid='${user.userid}'>삭제</a>
                                             </td>
                                         </tr>`;
                         user1.insertAdjacentHTML('beforeend', html);
@@ -34,6 +34,41 @@
                     console.log(err);
                 });
 
+            // 삭제 요청하기
+            const dels = document.getElementsByClassName('del');
+
+            // 동적 이벤트 처리
+            document.addEventListener('click', async function (e) {
+
+                if (e.target.classList.contains('del')) {
+                    e.preventDefault();
+
+                    const userid = e.target.dataset.userid;
+
+                    const params = `mode=json&userid=${userid}`;
+
+                    if (confirm(userid + ' 사용자를 정말 삭제하시겠습니까?')) {
+                        try {
+                            const response = await fetch(`http://localhost:8080/ch09/user1/delete.do?${params}`, {
+                                method: 'GET'
+                            });
+                            const data = await response.json(); // 서버에서 {"result": 1} 형태의 응답을 기대
+
+                            if (data.result > 0) {
+                                alert('삭제 성공!');
+
+                                // 🌟 팁: 클릭된 삭제 버튼에서 가장 가까운 tr 태그를 찾아서 화면에서 제거
+                                e.target.closest('tr').remove();
+                            } else {
+                                alert('삭제 실패!');
+                            }
+                        } catch (error) {
+                            console.error('삭제 통신 중 에러 발생', error);
+                        }
+                    }
+                }
+
+            });
 
         });
 
