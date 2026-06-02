@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User1 등록</title>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function(){
+
+            const btnSubmit = document.getElementById('submit');
+            const form = document.formUser; // form 태그 name 속성값으로 문서객체 가져오기
+ 
+            btnSubmit.addEventListener('click', function(e){
+                e.preventDefault();
+
+                // JSON 생성
+                const jsonData = {
+                    "userid": form.userid.value,
+                    "name": form.name.value,
+                    "hp": form.hp.value,
+                    "age": form.age.value,
+                };
+
+                console.log(jsonData);
+
+            });
+
+
+
+
+
+        });
+
+
+
+    </script>
+
+</head>
+<body>
+    <h3>User1 등록</h3>
+
+    <a href="./list.html">목록</a>
+    <a href="./register.html">등록</a>
+
+    <form name="formUser">
+        <table border="1">
+            <tr>
+                <td>아이디</td>
+                <td><input type="text" name="userid"></td>
+            </tr>
+            <tr>
+                <td>이름</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>휴대폰</td>
+                <td><input type="text" name="hp"></td>
+            </tr>
+            <tr>
+                <td>나이</td>
+                <td><input type="number" name="age"></td>
+            </tr>
+            <tr>					
+                <td colspan="2" align="right">
+                    <input type="submit" id="submit" value="등록하기">
+                </td>
+            </tr>			
+        </table>		
+    </form>
+
+
+</body>
+</html>

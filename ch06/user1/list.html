@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5_HTTP통신</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const user1 = document.getElementsByClassName('user1')[0];
+
+            // User1 데이터 요청하기
+            fetch('http://localhost:8080/ch09/user1/list.do?mode=json')
+                .then((response) => { return response.json() })
+                .then((data) => {
+                    console.log(data);
+
+                    for (const user of data) {
+                        const html = `<tr>
+                                            <td>${user.userid}</td>
+                                            <td>${user.name}</td>
+                                            <td>${user.hp}</td>
+                                            <td>${user.age}</td>
+                                            <td>
+                                                <a href='#'>수정</a>
+                                                <a href='#'>삭제</a>
+                                            </td>
+                                        </tr>`;
+                        user1.insertAdjacentHTML('beforeend', html);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <h3>User1 AJAX 실습</h3>
+
+    <a href="./list.html">목록</a>
+    <a href="./register.html">등록</a>
+    <table class="user1" border="1">
+        <tr>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>휴대폰</th>
+            <th>나이</th>
+            <th>관리</th>
+        </tr>
+    </table>
+
+</body>
+
+</html>
